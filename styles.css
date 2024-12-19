@@ -1,87 +1,281 @@
 :root {
     --light-grey: #f5f6f7;
-    --dark-blue: #0a0a23;
-    --fcc-blue: #1b1b32;
-    --light-yellow: #fecc4c;
-    --dark-yellow: #feac32;
-    --light-pink: #ffadad;
+    --dark-blue: #1a1b4b;
+    --fcc-blue: #2d2d67;
+    --light-yellow: #ffd93d;
+    --dark-yellow: #ffc107;
+    --light-pink: #ff6b6b;
     --dark-red: #850000;
-    --light-green: #acd157;
+    --light-green: #4ade80;
+    --transition: all 0.3s ease-in-out;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --card-bg: rgba(255, 255, 255, 0.05);
 }
   
 body {
-    font-family: "Lato", Helvetica, Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 18px;
-    background-color: var(--fcc-blue);
+    background: linear-gradient(135deg, var(--dark-blue), var(--fcc-blue));
     color: var(--light-grey);
+    min-height: 100vh;
+    line-height: 1.6;
 }
   
-h1 {
-    text-align: center;
+/* Center the main container */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem;
+  min-height: auto;
 }
   
 .container {
     width: 90%;
-    max-width: 680px;
+    max-width: 800px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    margin: 1rem auto;
 }
   
-h1,
-.container,
-.output {
-    margin: 20px auto;
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(to right, var(--light-yellow), var(--light-pink));
+    -webkit-background-clip: text;
+    color: transparent;
+    text-align: center;
 }
   
-label,
+fieldset {
+    border: none;
+    background: var(--card-bg);
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+    transition: var(--transition);
+}
+  
+fieldset:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+  
 legend {
-    font-weight: bold;
+    font-size: 1rem;
+    color: var(--light-yellow);
+    padding: 0 0.75rem;
+    font-weight: 500;
 }
   
-.input-container {
-    display: flex;
-    flex-direction: column;
+input, select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--light-grey);
+    transition: var(--transition);
+    box-sizing: border-box;
+}
+  
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--light-yellow);
+    box-shadow: 0 0 0 2px rgba(254, 204, 76, 0.2);
 }
   
 button {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: var(--transition);
+    background: var(--light-yellow);
+    border: none;
+    color: var(--dark-blue);
     cursor: pointer;
-    text-decoration: none;
-    background-color: var(--light-yellow);
-    border: 2px solid var(--dark-yellow);
 }
   
-button,
-input,
-select {
-    min-height: 24px;
-    color: var(--dark-blue);
-  }
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    background: var(--dark-yellow);
+}
   
-fieldset,
-label,
-button,
-input,
-select {
-    margin-bottom: 10px;
+/* Improve form layout */
+#calorie-counter {
+  display: grid;
+  gap: 1rem;
+}
+  
+/* Improve controls layout */
+.controls {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+  
+.control-group {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+  
+/* Button container layout */
+.button-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+  
+/* Input groups */
+.input-group {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
   
 .output {
-    border: 2px solid var(--light-grey);
-    padding: 10px;
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 12px;
     text-align: center;
+    animation: slideUp 0.3s ease-out;
+}
+  
+.output span {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+  
+.surplus {
+    color: var(--light-pink);
+}
+  
+.deficit {
+    color: var(--light-green);
 }
   
 .hide {
     display: none;
 }
   
-.output span {
-    font-weight: bold;
-    font-size: 1.2em;
+/* Animations */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
-
-.surplus {
-    color: var(--light-pink);
+  
+.input-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 0.25rem;
+    animation: fadeIn 0.3s ease-out;
 }
-
-.deficit {
-    color: var(--light-green);
+  
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+  
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .controls span {
+        grid-template-columns: 1fr;
+    }
+  
+    .button-container {
+        grid-template-columns: 1fr;
+    }
+  
+    .container {
+        width: 95%;
+        padding: 1rem;
+    }
+  
+    .controls {
+        flex-direction: column;
+    }
+  
+    button {
+        width: 100%;
+    }
+}
+  
+/* Add these styles for the budget input container */
+#calorie-counter {
+  display: grid;
+  gap: 1.5rem;
+}
+  
+/* Create a wrapper for the budget input */
+.budget-container {
+  display: grid;
+  gap: 0.5rem;
+}
+  
+/* Adjust select element to match width */
+select {
+  width: 100%;
+  min-width: 200px;
+}
+  
+/* Style for input groups within containers */
+.input-container label {
+    color: var(--light-grey);
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+  
+.input-container input {
+    margin-bottom: 1rem;
+}
+  
+/* Empty state styling */
+.input-container:empty::before {
+    content: 'No entries yet';
+    color: var(--light-grey);
+    opacity: 0.5;
+    font-style: italic;
+    text-align: center;
+    padding: 0.5rem;
+}
+  
+/* Section specific styling */
+#breakfast .input-container:empty::before {
+    content: 'Add breakfast items';
+}
+  
+#lunch .input-container:empty::before {
+    content: 'Add lunch items';
+}
+  
+#dinner .input-container:empty::before {
+    content: 'Add dinner items';
+}
+  
+#snacks .input-container:empty::before {
+    content: 'Add snack items';
+}
+  
+#exercise .input-container:empty::before {
+    content: 'Add exercise activities';
 }

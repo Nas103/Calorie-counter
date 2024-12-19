@@ -30,6 +30,18 @@ function addEntry() {
     placeholder="Calories"
   />`;
   targetInputContainer.insertAdjacentHTML('beforeend', HTMLString);
+  
+  // Add animation to new entries
+  const newInputs = targetInputContainer.querySelectorAll('input');
+  newInputs.forEach(input => {
+    input.style.opacity = '0';
+    input.style.transform = 'translateY(20px)';
+    requestAnimationFrame(() => {
+      input.style.transition = 'all 0.3s ease-out';
+      input.style.opacity = '1';
+      input.style.transform = 'translateY(0)';
+    });
+  });
 }
 
 function calculateCalories(e) {
